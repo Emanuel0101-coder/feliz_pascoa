@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feliz Páscoa</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Tela de entrada -->
+  <div class="entrada" id="entrada">
+    <div class="botao-inicial" onclick="entrarSite()">Click me ❤️</div>
+  </div>
+
+  <!-- Conteúdo principal -->
+  <div class="tela-principal" id="principal">
+    <!-- LINHA DECORATIVA -->
+    <hr class="decorative-line" />
+
+    <!-- PLAYER DE MÚSICA BONITO -->
+    <div class="music-player">
+      <img src="img/capa.png" alt="Capa do Álbum" class="cover-left">
+      <div class="info-right">
+        <div class="music-info">
+          <strong>Os Anjos Cantam</strong><br>
+          Jorge & Mateus
+        </div>
+        <div class="player-controls">
+          <input type="range" id="progressBar" value="0" max="100">
+          <button id="playPauseBtn" class="play-icon">▶️</button>
+        </div>
+        <audio id="audio" src="img/Jorge & Mateus - Os Anjos Cantam (LyricVideo) [Álbum Os Anjos Cantam].mp3"></audio>
+      </div>
+    </div>
+
+    <!-- TÍTULO DE PÁSCOA -->
+    <h2 class="easter-title">Feliz Páscoa 😍</h2>
+    <div class="hearts-container" id="hearts-container"></div>
+
+    <!-- CARROSSEL -->
+    <div class="carousel-container">
+      <div class="carousel-track" id="carousel-track">
+        <img src="img/img1.png" class="carousel-img" />
+        <img src="img/img2.png" class="carousel-img" />
+        <img src="img/img3.png" class="carousel-img" />
+        <img src="img/img4.png" class="carousel-img" />
+        <img src="img/img5.png" class="carousel-img" />
+        <img src="img/img7.png" class="carousel-img" />
+        <img src="img/img8.png" class="carousel-img" />
+      </div>
+    </div>
+
+    <!-- CONTADOR -->
+    <div class="contador">
+      <h2>❤️ Eu gosto de você há: ❤️</h2>
+      <br>
+      <div id="love-timer" style="font-size: 1.4rem; color: white;"></div>
+    </div>
+
+    <hr class="linha-estilizada"/>
+
+    <!-- RODAPÉ -->
+    <footer class="footer">
+      <div class="mensagem-romantica">
+        <p>
+          <strong>Sobre você 🫵:</strong>
+          <br><br>
+          Oláaaa :D <br><br>
+          Gostou do que eu fiz? Espero que sim! Afinal de contas, quando se trata de você, não importa o tamanho do trabalho que eu tenha — eu faço, e faço com o maior prazer do mundo. Porque é você. E você vale o esforço, vale a pena… você vale tudo pra mim. <br><br>
+          Se eu pudesse fazer mais do que apenas um site com um carrossel das <strong>nossas</strong> imagens, pode ter certeza que eu faria. <br><br>
+          Sabe, Júlia… você é muito especial pra mim, de verdade. Eu amo fazer essas coisas pra você, só pra te lembrar o quanto você é importante na minha vida. <br><br>
+          E como esse timer aí mostra, eu gosto de você há todo esse tempo — e esse tempo só vai aumentar, e muito mais! Porque é com você que eu quero estar. <br><br>
+          Sou muito grato por ter você ao meu lado, de verdade. E espero, do fundo do coração, que no futuro eu consiga te fazer muito feliz. ❤️
+        </p>
+      </div>
+    </footer>
+
+  <!-- Scripts -->
+  <script>
+    function entrarSite() {
+      const entrada = document.getElementById('entrada');
+      const principal = document.getElementById('principal');
+      entrada.classList.add('saindo');
+      setTimeout(() => {
+        principal.classList.add('ativa');
+      }, 100);
+    }
+
+    const audio = document.getElementById('audio');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const progressBar = document.getElementById('progressBar');
+
+    playPauseBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        playPauseBtn.textContent = '⏸️';
+      } else {
+        audio.pause();
+        playPauseBtn.textContent = '▶️';
+      }
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      if (!isNaN(audio.duration)) {
+        const progress = (audio.currentTime / audio.duration) * 100;
+        progressBar.value = progress;
+      }
+    });
+
+    progressBar.addEventListener('input', () => {
+      if (!isNaN(audio.duration)) {
+        audio.currentTime = (progressBar.value / 100) * audio.duration;
+      }
+    });
+
+    // CONTADOR
+    const startDate = new Date(2025, 0, 10); // 10 de janeiro
+    const timerEl = document.getElementById('love-timer');
+    function updateTimer() {
+      const now = new Date();
+      const diff = now - startDate;
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      timerEl.innerText = `${days} Days ${hours}h ${minutes}m ${seconds}s`;
+    }
+    setInterval(updateTimer, 1000);
+    updateTimer();
+
+    // CORAÇÕES CAINDO
+    const container = document.getElementById('hearts-container');
+    function criarCoracao() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerText = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = 2 + Math.random() * 3 + 's';
+      container.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(criarCoracao, 300);
+  </script>
+</body>
+</html>
