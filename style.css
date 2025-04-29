@@ -68,7 +68,9 @@ body {
   max-width: 500px;
   margin: 30px auto;
   box-shadow: 0 0 15px rgba(255, 64, 129, 0.6);
+  width: 100%; /* Adicionando largura 100% para manter responsividade */
 }
+
 .cover-left {
   width: 80px;
   height: 80px;
@@ -76,18 +78,22 @@ body {
   border-radius: 12px;
   margin-right: 20px;
 }
+
 .info-right {
   flex: 1;
 }
+
 .music-info {
   font-size: 1rem;
   margin-bottom: 10px;
   text-align: center;
 }
+
 #progressBar {
   width: 100%;
   margin: 5px 0;
 }
+
 .play-icon {
   font-size: 1.5rem;
   background: none;
@@ -96,22 +102,86 @@ body {
   cursor: pointer;
 }
 
-/* Carrossel */
+/* Responsividade para dispositivos móveis */
+@media (max-width: 768px) {
+  /* Ajuste no player de música */
+  .music-player {
+    padding: 10px 15px;  /* Menos padding */
+    max-width: 90%; /* Player ocupa 90% da tela no celular */
+    margin: 20px auto;  /* Margin reduzida */
+  }
+
+  .cover-left {
+    width: 60px; /* Reduzido para melhor proporcionalidade */
+    height: 60px;
+  }
+
+  .play-icon {
+    font-size: 1.2rem; /* Tamanho reduzido para mobile */
+  }
+
+  .music-info {
+    font-size: 0.9rem; /* Tamanho da fonte ajustado */
+  }
+}
+
+/* Carrossel de Imagens */
 .carousel-container {
   max-width: 350px;
   margin: 30px auto;
   overflow: hidden;
   border-radius: 12px;
+  width: 100%; /* Garante que o carrossel ocupe 100% da largura disponível */
 }
+
 .carousel-track {
   display: flex;
   animation: slide 19s infinite ease-in-out;
 }
+
 .carousel-img {
-  width: 100%;
+  width: 100%; /* Garante que a imagem ocupe toda a largura do carrossel */
   object-fit: cover;
   border-radius: 12px;
 }
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 480px) {
+  /* Ajuste no carrossel */
+  .carousel-container {
+    max-width: 90%;  /* Carrossel ocupa 90% da tela */
+    margin: 20px auto;  /* Margin reduzida */
+  }
+
+  .carousel-img {
+    height: auto;  /* Garante que as imagens se ajustem corretamente */
+  }
+
+  /* Ajuste no player de música */
+  .music-player {
+    padding: 10px 15px;
+    max-width: 90%;
+    margin: 20px auto;
+  }
+
+  .cover-left {
+    width: 60px;
+    height: 60px;
+  }
+
+  .play-icon {
+    font-size: 1.2rem;
+  }
+
+  .music-info {
+    font-size: 0.9rem;
+  }
+
+  .botao-inicial {
+    font-size: 1.5rem; /* Mantém o botão legível sem forçar redução de tamanho */
+  }
+}
+
 @keyframes slide {
   0%, 10%     { transform: translateX(0); }             /* img1 */
   14.28%, 24.28% { transform: translateX(-100%); }      /* img2 */
@@ -186,7 +256,6 @@ body {
   color: white;
   cursor: pointer;
 }
-
 
 /* Rodapé */
 .footer {
